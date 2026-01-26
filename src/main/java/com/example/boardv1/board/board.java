@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Data // getter, setter, toString
 @Entity // 해당 어노테이션을 보고 컴퍼넌트 스캔 후, 데이터베이스 테이블을 생성한다. -> java에서 클래스 만들고 DB 세싱에 만드는 순서
 @Table(name = "board_tb") // 테이블명 정하기
-public class board {
+public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

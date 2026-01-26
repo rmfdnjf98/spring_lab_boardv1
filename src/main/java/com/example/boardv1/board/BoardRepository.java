@@ -1,0 +1,45 @@
+package com.example.boardv1.board;
+
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import lombok.RequiredArgsConstructor;
+
+/**
+ * 하이버네이트 기술
+ */
+
+@RequiredArgsConstructor // final이 붙어있는 모든 필드를 초기화하는 생성자를 만들어줌.
+@Repository // 컴포넌트 스캔해서 new가 자동으로 된다.(싱글톤으로 객체 하나로 관리)
+public class BoardRepository {
+    private final EntityManager em;
+
+    // DI = 의존성 주입 (의존하고 있는게 IoC에 떠있어야됨)
+    // public BoardRepository(EntityManager em) { // 생성자
+    // this.em = em;
+    // }
+
+    public Board findById(int id) {
+        Board board = em.find(Board.class, id);
+        return board;
+    }
+
+    public List<Board> findAll() {
+        Query query = em.createQuery("select b from Board b", Board.class);
+        List<Board> list = query.getResultList();
+        return list;
+    }
+
+    public void save(Board board) {
+        em.persist(board);
+    }
+
+    public void delete(Board board) {
+        em.remove(board);
+    }
+
+}
